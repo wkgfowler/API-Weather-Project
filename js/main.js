@@ -1,4 +1,4 @@
-const APIKey = "(insert own API Key here)"
+const APIKey = "(insert API Key here)"
 
 const getdata = async (city) => {
     let response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKey}`)
@@ -13,7 +13,8 @@ const getweatherstatus = async (city) => {
 }
 
 const DOM_ELEMENTS ={
-    weather_info: '.weather-info'
+    weather_info: '.weather-info',
+    image_source: '.image-source'
 }
 
 const load_data = async () => {
@@ -41,20 +42,26 @@ const create_info = (city, current, high, low, forecast, humidity) => {
 
 const clear_data = () => {
     document.querySelector(DOM_ELEMENTS.weather_info).innerHTML = ''
+    document.querySelector(DOM_ELEMENTS.image_source).innerHTML = ''
 }
 
 const weather_photo = (icon) => {
     console.log(icon)
     if (icon.endsWith('n')) {   
         document.getElementById('hero-img').style.backgroundImage = "url('../images/phil-botha-a0TJ3hy-UD8-unsplash_1120x730.jpg')";
+        document.querySelector(DOM_ELEMENTS.image_source).innerHTML = 'Photo by <a href="https://unsplash.com/@philbotha?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Phil Botha</a> on <a href="https://unsplash.com/s/photos/night-time?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>'
     } else if (icon.match(/[0][2-9]d+/)) {
         document.getElementById('hero-img').style.backgroundImage = "url('../images/tim-oliver-metz-glFocUiIyWo-unsplash_1120x730.jpg')";
+        document.querySelector(DOM_ELEMENTS.image_source).innerHTML = 'Photo by <a href="https://unsplash.com/@to_metz?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Tim-Oliver Metz</a> on <a href="https://unsplash.com/s/photos/cloudy-day?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>'
     } else if (icon.match(/[1][0-1]d+/))  {
         document.getElementById('hero-img').style.backgroundImage = "url('../images/fotografierende-3ENfnnjbdJs-unsplash_1120x730.jpg')";
+        document.querySelector(DOM_ELEMENTS.image_source).innerHTML = 'Photo by <a href="https://unsplash.com/@fotografierende?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">fotografierende</a> on <a href="https://unsplash.com/s/photos/rainy-day?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>'
     } else if (icon == '13d') {
         document.getElementById('hero-img').style.backgroundImage = "url('../images/adam-chang-IWenq-4JHqo-unsplash_1120x730.jpg')";
+        document.querySelector(DOM_ELEMENTS.image_source).innerHTML = 'Photo by <a href="https://unsplash.com/@sametomorrow?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Adam Chang</a> on <a href="https://unsplash.com/s/photos/snowing?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>'
     } else {
         document.getElementById('hero-img').style.backgroundImage = "url('../images/andrey-grinkevich-0x6RTts1jRU-unsplash_1120x730.jpg')";
+        document.querySelector(DOM_ELEMENTS.image_source).innerHTML = 'Photo by <a href="https://unsplash.com/@grin?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Andrey Grinkevich</a> on <a href="https://unsplash.com/collections/4686133/sunny-day-summer?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>'
     }
 }
 
